@@ -1,0 +1,25 @@
+<div class="container row" *ngIf="!(userService.userSession | async)">
+
+  <h1>Log In</h1>
+
+  <form class="col s12" #formLogIn="ngForm" (ngSubmit)="logIn()">
+    <div class="input-field col s6">
+      <i class="material-icons prefix">person</i>
+      <input class="validate" id="email" type="email" name="email" #name="ngModel" [(ngModel)]="user.email" required>
+      <label for="email">Email</label>
+    </div>
+    <div class="input-field col s6">
+      <i class="material-icons prefix">lock</i>
+      <input class="validate" id="password" type="password" name="password" #password="ngModel" [(ngModel)]="user.password" required>
+      <label for="password">Password</label>
+    </div>
+    <div class="center-align">
+      <button class="btn waves-effect waves-light" type="submit" [disabled]="!formLogIn.form.valid">Log In<i class="material-icons right">send</i></button>
+    </div>
+  </form>
+
+</div>
+
+<div class="container row" *ngIf="userService.userSession | async">
+  Ya estás logueado, no necesitas iniciar sesión.
+</div>
