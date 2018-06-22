@@ -13,15 +13,11 @@ export class UserService {
   }
 
   signIn(user: User) {
-    this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password)
-      .then()
-      .catch();
+    return this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
   }
 
   logIn(user: User) {
-    this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+    return this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
   }
 
   logOut() {
