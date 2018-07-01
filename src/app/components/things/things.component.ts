@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ThingService } from '../../services/thing.service';
+import * as M from 'materialize-css';
 
 @Component({
   selector: 'app-things',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ThingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private thingService: ThingService) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  removeThing(key) {
+    const removePromises = this.thingService.removeThing(key);
+
+    removePromises
+      .then(res => M.toast(res))
+      .catch(err => M.toast(err));
   }
 
 }

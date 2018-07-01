@@ -18,8 +18,11 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireStorageModule, AngularFireStorage } from 'angularfire2/storage';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { UserService } from './services/user.service';
+import { ThingService } from './services/thing.service';
 
 @NgModule({
   declarations: [
@@ -38,9 +41,11 @@ import { UserService } from './services/user.service';
     FormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule
   ],
-  providers: [UserService],
+  providers: [UserService, ThingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

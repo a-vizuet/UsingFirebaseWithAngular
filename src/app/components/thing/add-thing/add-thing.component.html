@@ -1,3 +1,49 @@
-<p>
-  add-thing works!
-</p>
+<div class="container row" *ngIf="userService.userSession | async">
+
+  <h1>Add thing</h1>
+
+  <form class="col s12" #formAddThing="ngForm" (ngSubmit)="addThing(); formAddThing.reset()">
+    <div class="input-field col s12">
+      <i class="material-icons prefix">person</i>
+      <input class="validate" id="name" type="text" name="name" required #name="ngModel" [(ngModel)]="thing.name">
+      <label for="name">Name</label>
+    </div>
+    <div class="input-field col s12">
+      <i class="material-icons prefix">lock</i>
+      <textarea class="materialize-textarea validate" id="description" name="description" required #description="ngModel" [(ngModel)]="thing.desc"></textarea>
+      <label for="description">Description</label>
+    </div>
+    <div class="input-field col s12">
+      <i class="material-icons prefix">user</i>
+      <input class="validate" id="price" type="number" name="price" required #price="ngModel" [(ngModel)]="thing.price">
+      <label for="price">Price</label>
+    </div>
+    <div class="file-field input-field col s12">
+      <div class="btn">
+        <span>File</span>
+        <input type="file" (change)="getFile($event)">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+    <div class="center-align">
+      <button class="btn waves-effect waves-light" type="submit" [disabled]="!formAddThing.form.valid">Add Thing<i class="material-icons right">send</i></button>
+    </div>
+  </form>
+
+</div>
+
+<div class="container row" *ngIf="!userService.userSession | async">
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card yellow darken-2">
+        <div class="card-content white-text">
+          <span class="card-title">Hmm!</span>
+          <p>You need to log into your account to use this service.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

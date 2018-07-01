@@ -10,14 +10,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-  public user: User = new User('', '');
+  user: User = new User('', '', '', '');
+  file: File;
 
   constructor(private userService: UserService, private router: Router) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   signIn() {
+    this.userService.uploadImage(this.file, this.user.displayName);
+    /*
     const signInPromises = this.userService.signIn(this.user);
 
     signInPromises
@@ -27,7 +29,12 @@ export class SignInComponent implements OnInit {
       })
       .catch(err => {
         M.toast({ html: `There was an error while trying to create a new account. Try again. ${err}` });
-      });
+      });*/
+
+  }
+
+  getFile(event) {
+    this.file = event.target.files[0];
   }
 
 }

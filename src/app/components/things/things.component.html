@@ -1,3 +1,23 @@
-<p>
-  things works!
-</p>
+<div class="container row">
+
+  <div class="col s12 center-align" style="padding-top: 10px;">
+    <a class="waves-effect waves-light btn-large" [routerLink]="['/Thing/add']">Add thing</a>
+  </div>
+
+  <div class="col s4" *ngFor="let thing of thingService.things | async">
+    <div class="card">
+      <div class="card-image">
+        <img src="materializecss.com/images/sample-1.jpg">
+        <span class="card-title">{{ thing.name }} ${{ thing.price }}</span>
+      </div>
+      <div class="card-content">
+        <p>{{ thing.desc }}</p>
+      </div>
+      <div class="card-action">
+        <a [routerLink]="['/Thing/get/'+thing.key]">Ver</a>
+        <a [routerLink]="['/Thing/update/'+thing.key]">Editar</a>
+        <a (click)="removeThing(thing.key)">Eliminar</a>
+      </div>
+    </div>
+  </div>
+</div>

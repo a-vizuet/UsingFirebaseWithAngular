@@ -1,19 +1,26 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { User } from '../models/user';
-import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
+import { User } from '../models/user';
+import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 @Injectable()
 export class UserService {
   userSession: Observable<firebase.User>;
 
-  constructor(private afAuth: AngularFireAuth ) {
+  constructor(private afAuth: AngularFireAuth, private storage: AngularFireStorage ) {
     this.userSession = afAuth.authState;
   }
 
   signIn(user: User) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
+    return this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password)
+      .then(
+        userCreated => this.afAuth.auth.currentUser.updateProfile({
+          displayName: String(user.displayName),
+          photoURL: String(user.photoURL)
+        })
+      );
   }
 
   logIn(user: User) {
@@ -22,6 +29,10 @@ export class UserService {
 
   logOut() {
     this.afAuth.auth.signOut();
+  }
+
+  uploadImage(image, imageFilename) {
+    this.storage.upload(`images/users/${imageFilename}`, image).then(res => console.log(res)).catch(err => console.log(err));
   }
 
 }

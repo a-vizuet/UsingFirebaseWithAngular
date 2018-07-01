@@ -17,7 +17,15 @@
       <button class="btn waves-effect waves-light" type="submit" [disabled]="!formSignIn.form.valid">Sign In<i class="material-icons right">send</i></button>
     </div>
   </form>
-
+  <div class="file-field input-field col s12">
+    <div class="btn">
+      <span>File</span>
+      <input type="file" (change)="getFile($event)">
+    </div>
+    <div class="file-path-wrapper">
+      <input class="file-path validate" type="text">
+    </div>
+  </div>
 </div>
 
 <div class="container row" *ngIf="userService.userSession | async">
