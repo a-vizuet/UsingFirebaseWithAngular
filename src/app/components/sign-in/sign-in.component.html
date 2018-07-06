@@ -1,10 +1,9 @@
 <div class="container row" *ngIf="!(userService.userSession | async)">
 
   <h1>Sign In</h1>
-
-  <form class="col s12" #formSignIn="ngForm" (ngSubmit)="signIn(); formSignIn.reset()">
+  <form class="col s12" #formSignIn="ngForm" (ngSubmit)="signIn()">
     <div class="input-field col s6">
-      <i class="material-icons prefix">person</i>
+      <i class="material-icons prefix">email</i>
       <input class="validate" id="email" type="email" name="email" required #name="ngModel" [(ngModel)]="user.email">
       <label for="email">Email</label>
     </div>
@@ -13,19 +12,29 @@
       <input class="validate" id="password" type="password" name="password" required #password="ngModel" [(ngModel)]="user.password">
       <label for="password">Password</label>
     </div>
+    <div class="input-field col s6">
+      <i class="material-icons prefix">person</i>
+      <input class="validate" id="username" type="text" name="username" required #username="ngModel" [(ngModel)]="user.username">
+      <label for="username">Username</label>
+    </div>
+    <div class="file-field input-field col s6">
+      <div class="btn">
+        <span>Photo</span>
+        <input type="file" id="photo" name="photo" (change)="getFile($event)">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" id="photoText" name="photoText" type="text" required>
+      </div>
+    </div>
     <div class="center-align">
-      <button class="btn waves-effect waves-light" type="submit" [disabled]="!formSignIn.form.valid">Sign In<i class="material-icons right">send</i></button>
+      <button class="btn waves-effect waves-light" type="submit" [disabled]="!formSignIn.form.valid" *ngIf="uploadPercent == undefined">Sign In
+        <i class="material-icons right">send</i>
+      </button>
+      <div class="progress" *ngIf="uploadPercent != undefined">
+        <div class="determinate" [ngStyle]="{'width': (uploadPercent | async)+'%'}"></div>
+      </div>
     </div>
   </form>
-  <div class="file-field input-field col s12">
-    <div class="btn">
-      <span>File</span>
-      <input type="file" (change)="getFile($event)">
-    </div>
-    <div class="file-path-wrapper">
-      <input class="file-path validate" type="text">
-    </div>
-  </div>
 </div>
 
 <div class="container row" *ngIf="userService.userSession | async">

@@ -17,8 +17,8 @@ export class UserService {
     return this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password)
       .then(
         userCreated => this.afAuth.auth.currentUser.updateProfile({
-          displayName: String(user.displayName),
-          photoURL: String(user.photoURL)
+          displayName: String(user.username),
+          photoURL: String(user.photo)
         })
       );
   }
@@ -32,7 +32,7 @@ export class UserService {
   }
 
   uploadImage(image, imageFilename) {
-    this.storage.upload(`images/users/${imageFilename}`, image).then(res => console.log(res)).catch(err => console.log(err));
+    return this.storage.upload(`images/users/${imageFilename}`, image);
   }
 
 }
