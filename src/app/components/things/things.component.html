@@ -7,16 +7,26 @@
   <div class="col s4" *ngFor="let thing of thingService.things | async">
     <div class="card">
       <div class="card-image">
-        <img src="materializecss.com/images/sample-1.jpg">
+        <img src="https://firebasestorage.googleapis.com/v0/b/usingfirebase-9456e.appspot.com/o/images%2Fthings%2F{{thing.image}}?alt=media">
         <span class="card-title">{{ thing.name }} ${{ thing.price }}</span>
       </div>
       <div class="card-content">
-        <p>{{ thing.desc }}</p>
+        <p>{{ thing.description }}</p>
       </div>
       <div class="card-action">
         <a [routerLink]="['/Thing/get/'+thing.key]">Ver</a>
         <a [routerLink]="['/Thing/update/'+thing.key]">Editar</a>
-        <a (click)="removeThing(thing.key)">Eliminar</a>
+        <a (click)="removeThing(thing.key, thing.name)">Eliminar</a>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="(thingService.things | async) == ''">
+    <div class="col s12">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Error</span>
+          <p>There's no things.</p>
+        </div>
       </div>
     </div>
   </div>

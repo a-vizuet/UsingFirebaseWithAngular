@@ -11,14 +11,15 @@ export class ThingsComponent implements OnInit {
 
   constructor(private thingService: ThingService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
-  removeThing(key) {
+  removeThing(key, name) {
     const removePromises = this.thingService.removeThing(key);
 
     removePromises
-      .then(res => M.toast(res))
-      .catch(err => M.toast(err));
+      .then(res => M.toast({ html: `${name} has successfully removed!` }))
+      .catch(err => M.toast({ html: `There was an error trying to removed ${name}!` }));
   }
 
 }

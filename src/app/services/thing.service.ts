@@ -16,6 +16,7 @@ export class ThingService {
     this.things = this.thingsRef.snapshotChanges().pipe(
       map(changes => changes.map(c => ({ key: c.payload.key, ...c.payload.val() })))
     );
+    let alv = this.db.object('Things').snapshotChanges();
   }
 
   addThing(thing: Thing) {
@@ -24,15 +25,18 @@ export class ThingService {
 
   updateThing(thing: Thing) {}
 
-  getThing() {
+  getThing(key) {
+    return this.things.pipe(
+      map(things => things.filter(thing => thing.key === key))
+    );
   }
 
   removeThing(key) {
     return this.thingsRef.remove(key);
   }
 
-  uploadImage(image) {
-    return this.storage.upload(``, image);
+  uploadImage(image, imageFilename) {
+    return this.storage.upload(`images/things/${imageFilename}`, image);
   }
 
 }

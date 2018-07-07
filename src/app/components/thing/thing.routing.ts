@@ -7,6 +7,6 @@ import { ThingComponent } from './thing.component';
 export const ThingChildrenRoutes: Routes = [
   { path: '', redirectTo: 'thing', pathMatch: 'full' },
   { path: 'add', component: AddThingComponent },
-  { path: 'update/:id', component: UpdateThingComponent }
+  { path: 'update/:key', component: UpdateThingComponent }
   //{ path: 'get/:id' }
 ];

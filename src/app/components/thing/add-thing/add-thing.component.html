@@ -2,7 +2,7 @@
 
   <h1>Add thing</h1>
 
-  <form class="col s12" #formAddThing="ngForm" (ngSubmit)="addThing(); formAddThing.reset()">
+  <form class="col s12" #formAddThing="ngForm" (ngSubmit)="addThing()">
     <div class="input-field col s12">
       <i class="material-icons prefix">person</i>
       <input class="validate" id="name" type="text" name="name" required #name="ngModel" [(ngModel)]="thing.name">
@@ -10,25 +10,30 @@
     </div>
     <div class="input-field col s12">
       <i class="material-icons prefix">lock</i>
-      <textarea class="materialize-textarea validate" id="description" name="description" required #description="ngModel" [(ngModel)]="thing.desc"></textarea>
+      <textarea class="materialize-textarea validate" id="description" name="description" required #description="ngModel" [(ngModel)]="thing.description"></textarea>
       <label for="description">Description</label>
     </div>
     <div class="input-field col s12">
-      <i class="material-icons prefix">user</i>
+      <i class="material-icons prefix">attach_money</i>
       <input class="validate" id="price" type="number" name="price" required #price="ngModel" [(ngModel)]="thing.price">
       <label for="price">Price</label>
     </div>
     <div class="file-field input-field col s12">
       <div class="btn">
-        <span>File</span>
-        <input type="file" (change)="getFile($event)">
+        <span>Image</span>
+        <input id="image" name="image" type="file" required (change)="getFile($event)">
       </div>
       <div class="file-path-wrapper">
-        <input class="file-path validate" type="text">
+        <input class="file-path validate" id="imageText" name="imageText" type="text" required>
       </div>
     </div>
     <div class="center-align">
-      <button class="btn waves-effect waves-light" type="submit" [disabled]="!formAddThing.form.valid">Add Thing<i class="material-icons right">send</i></button>
+      <button class="btn waves-effect waves-light" type="submit" [disabled]="!formAddThing.form.valid" *ngIf="uploadPercent == undefined">Add Thing
+        <i class="material-icons right">send</i>
+      </button>
+      <div class="progress" *ngIf="uploadPercent != undefined">
+        <div class="determinate" [ngStyle]="{'width': (uploadPercent | async)+'%'}"></div>
+      </div>
     </div>
   </form>
 
