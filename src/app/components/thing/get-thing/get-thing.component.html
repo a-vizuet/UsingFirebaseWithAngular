@@ -1,0 +1,18 @@
+<div class="container row">
+  <div class="card" *ngIf="test((thing | async)) === true">
+    <div class="card-image">
+      <img src="https://firebasestorage.googleapis.com/v0/b/usingfirebase-9456e.appspot.com/o/images%2Fthings%2F{{ (thing| async)?.image }}?alt=media">
+      <span class="card-title">{{ (thing | async)?.name }} ${{ (thing | async)?.price }}</span>
+    </div>
+    <div class="card-content">
+      <p>{{ (thing | async)?.description }}</p>
+    </div>
+    <div class="card-action">
+      <a [routerLink]="['/Thing/update/'+((thing | async)?.key)]">Editar</a>
+      <a (click)="removeThing()">Eliminar</a>
+    </div>
+  </div>
+  <div *ngIf="test((thing | async)) === false">
+    No existe...
+  </div>
+</div>

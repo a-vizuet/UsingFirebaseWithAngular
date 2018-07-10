@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThingService } from '../../../services/thing.service';
-import { map } from 'rxjs/operators';
-import { Thing } from '../../../models/thing';
-
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-update-thing',
@@ -12,7 +10,7 @@ import { Thing } from '../../../models/thing';
 })
 export class UpdateThingComponent implements OnInit {
   thingKey: string;
-  thing: any;
+  thing: Observable<any>;
 
   constructor(private thingService: ThingService, private activatedRoute: ActivatedRoute) {
     this.thingKey = this.activatedRoute.snapshot.paramMap.get('key');
@@ -20,6 +18,7 @@ export class UpdateThingComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.thing.forEach(item => console.log(item))
   }
 
 }
