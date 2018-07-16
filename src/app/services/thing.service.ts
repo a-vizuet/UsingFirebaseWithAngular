@@ -16,7 +16,6 @@ export class ThingService {
     this.things = this.thingsRef.snapshotChanges().pipe(
       map(changes => changes.map(c => ({ key: c.payload.key, ...c.payload.val() })))
     );
-    let alv = this.db.object('Things').snapshotChanges();
   }
 
   addThing(thing: Thing) {
@@ -26,8 +25,8 @@ export class ThingService {
   updateThing(thing: Thing) {}
 
   getThing(key) {
-    return this.things.pipe(
-      map(things => things.filter(thing => thing.key === key))
+    return this.db.object(`Things/${key}`).snapshotChanges().pipe(
+      map(c => ({ ...c.payload.val() }))
     );
   }
 

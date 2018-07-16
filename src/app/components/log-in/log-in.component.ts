@@ -13,7 +13,7 @@ export class LogInComponent implements OnInit {
   public user: User = new User('', '', '', '');
   public text: string;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(public userService: UserService, private router: Router) {}
 
   ngOnInit() {}
 

@@ -23,6 +23,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { UserService } from './services/user.service';
 import { ThingService } from './services/thing.service';
+import { GetThingComponent } from './components/thing/get-thing/get-thing.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ThingService } from './services/thing.service';
     HomeComponent,
     NotFoundComponent,
     AddThingComponent,
-    UpdateThingComponent
+    UpdateThingComponent,
+    GetThingComponent
   ],
   imports: [
     BrowserModule,
