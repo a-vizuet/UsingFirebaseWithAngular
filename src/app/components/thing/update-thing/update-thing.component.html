@@ -1,3 +1,48 @@
-<p>
-  {{ thing[0] | async | json}}
-</p>
+<div class="container row">
+
+  <form class="col s12" #formAddThing="ngForm" (ngSubmit)="updateThing()" *ngIf="thing | async as t; else no;">
+    <div class="input-field col s12">
+      <i class="material-icons prefix">person</i>
+      <input class="validate" id="name" type="text" name="name" #name="ngModel" [(ngModel)]="thing.name">
+      <label for="name">Name</label>
+    </div>
+    <div class="input-field col s12">
+      <i class="material-icons prefix">lock</i>
+      <textarea class="materialize-textarea validate" id="description" name="description"  #description="ngModel" [(ngModel)]="thing.description"></textarea>
+      <label for="description">Description</label>
+    </div>
+    <div class="input-field col s12">
+      <i class="material-icons prefix">attach_money</i>
+      <input class="validate" id="price" type="number" name="price"  #price="ngModel" [(ngModel)]="thing.price">
+      <label for="price">Price</label>
+    </div>
+    <div class="file-field input-field col s12">
+      <div class="btn">
+        <span>Image</span>
+        <input id="image" name="image" type="file"  (change)="getFile($event)">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" id="imageText" name="imageText" type="text" >
+      </div>
+    </div>
+    <div class="center-align">
+      <button class="btn waves-effect waves-light" type="submit" [disabled]="!formAddThing.form.valid" *ngIf="uploadPercent == undefined">Add Thing
+        <i class="material-icons right">send</i>
+      </button>
+      <div class="progress" *ngIf="uploadPercent != undefined">
+        <div class="determinate" [ngStyle]="{'width': (uploadPercent | async)+'%'}"></div>
+      </div>
+    </div>
+  </form>
+
+
+  <ng-template #no>
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span class="card-title">Loading...</span>
+        <p>If the page didn't load then the thing you're trying to accede doesn't exist.</p>
+      </div>
+    </div>
+  </ng-template>
+
+</div>

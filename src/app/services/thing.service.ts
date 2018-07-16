@@ -22,7 +22,9 @@ export class ThingService {
     return this.thingsRef.push(thing);
   }
 
-  updateThing(thing: Thing) {}
+  updateThing(key, thing: Thing) {
+    return this.db.object(`Things/${key}`).update(thing);
+  }
 
   getThing(key) {
     return this.db.object(`Things/${key}`).snapshotChanges().pipe(
