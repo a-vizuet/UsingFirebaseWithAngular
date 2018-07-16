@@ -26,7 +26,7 @@ export class ThingService {
 
   getThing(key) {
     return this.db.object(`Things/${key}`).snapshotChanges().pipe(
-      map(c => ({ ...c.payload.val() }))
+      map(c => c.payload.val() === null ? null : { key: c.payload.key, ...c.payload.val() })
     );
   }
 

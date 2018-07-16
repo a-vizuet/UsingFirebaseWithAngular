@@ -16,7 +16,7 @@ export class AddThingComponent implements OnInit {
   file: File;
   uploadPercent: Observable<number>;
 
-  constructor(private thingService: ThingService, private userService: UserService) {}
+  constructor(public thingService: ThingService, public userService: UserService) {}
 
   ngOnInit() {}
 

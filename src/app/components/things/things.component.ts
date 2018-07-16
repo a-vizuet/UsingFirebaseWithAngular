@@ -9,7 +9,7 @@ import * as M from 'materialize-css';
 })
 export class ThingsComponent implements OnInit {
 
-  constructor(private thingService: ThingService) { }
+  constructor(public thingService: ThingService) { }
 
   ngOnInit() {
   }
@@ -19,7 +19,7 @@ export class ThingsComponent implements OnInit {
 
     removePromises
       .then(res => M.toast({ html: `${name} has successfully removed!` }))
-      .catch(err => M.toast({ html: `There was an error trying to removed ${name}!` }));
+      .catch(err => M.toast({ html: `There was an error trying to remove ${name}!` }));
   }
 
 }
