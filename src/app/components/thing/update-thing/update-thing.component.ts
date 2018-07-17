@@ -21,8 +21,8 @@ export class UpdateThingComponent implements OnInit {
   ngOnInit() {}
 
   updateThing(key, thing) {
-    console.log(thing)
-    const updatePromises = this.thingService.updateThing(key, thing);
+    const update = new Thing(thing.name, thing.description, thing.price, thing.image),
+          updatePromises = this.thingService.updateThing(key, update);
 
     updatePromises
       .then(res => M.toast({ html: `${thing.name} has successfully updated!` }))

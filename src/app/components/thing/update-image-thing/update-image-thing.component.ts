@@ -32,7 +32,7 @@ export class UpdateImageThingComponent implements OnInit {
 
     uploadImagePromises
       .then(resImageUploaded => {
-        const update = new Thing(null, null, null, resImageUploaded.metadata.name),
+        const update = { image: resImageUploaded.metadata.name },
               updateThingPromises = this.thingService.updateThing(key, update);
 
         updateThingPromises

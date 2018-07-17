@@ -22,8 +22,8 @@ export class ThingService {
     return this.thingsRef.push(thing);
   }
 
-  updateThing(key, thing: Thing) {
-    return this.db.object(`Things/${key}`).update(thing);
+  updateThing(key, update) {
+    return this.db.object(`Things/${key}`).update(update);
   }
 
   getThing(key) {

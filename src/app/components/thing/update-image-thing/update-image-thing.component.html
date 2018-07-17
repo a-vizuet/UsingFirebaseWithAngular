@@ -1,6 +1,8 @@
 <div class="container row">
 
   <form class="col s12" #formAddThing="ngForm" (ngSubmit)="updateImageThing(t.key, t)" *ngIf="thing | async as t; else no;">
+      <img class="responsive-img" src="https://firebasestorage.googleapis.com/v0/b/usingfirebase-9456e.appspot.com/o/images%2Fthings%2F{{ t.image }}?alt=media">
+
     <div class="file-field input-field col s12">
       <div class="btn">
         <span>Image</span>
