@@ -12,7 +12,7 @@ declare var $: any;
 })
 export class AppComponent implements OnInit {
 
-  constructor(private userService: UserService) {}
+  constructor(public userService: UserService) {}
 
   ngOnInit() {
     $(document).ready(

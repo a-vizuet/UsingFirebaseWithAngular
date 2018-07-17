@@ -15,7 +15,7 @@ export class SignInComponent implements OnInit {
   file: File;
   uploadPercent: Observable<number>;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(public userService: UserService, private router: Router) {}
 
   ngOnInit() {}
 
